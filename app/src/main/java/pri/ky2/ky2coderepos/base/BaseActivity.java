@@ -1,17 +1,27 @@
 package pri.ky2.ky2coderepos.base;
 
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.text.TextUtils;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import pri.ky2.ky2coderepos.R;
 
+/**
+ * Activity 基类
+ *
+ * @author wangkaiyan
+ * @date 2019/07/23
+ */
 public abstract class BaseActivity extends AppCompatActivity {
 
     protected final static String TAG = "BaseActivity";
@@ -35,8 +45,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(setLayoutId());
         ButterKnife.bind(this);
         initVariables(savedInstanceState);
-        Log.e(TAG, "tvTitle != null = " + (tvTitle != null));
-        Log.e(TAG, "setTitleId() != 0 = " + (setTitleId() != 0));
         if (tvTitle != null && setTitleId() != 0) {
             tvTitle.setText(getString(setTitleId()));
         }
@@ -54,7 +62,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 初始化各种变量，如 Bundle、上个页面传递过来的数据
      */
-    protected void initVariables(@Nullable Bundle savedInstanceState) {}
+    protected void initVariables(@Nullable Bundle savedInstanceState) {
+    }
 
     /**
      * 初始化 View 之后，进行数据填充、网络请求等操作
@@ -67,4 +76,76 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @return 页面标题 stringId，没有标题返回 0
      */
     protected abstract int setTitleId();
+
+    @OnClick({R.id.iv_common_title_back, R.id.tv_common_title_title,
+            R.id.tv_common_title_menu, R.id.iv_common_title_menu})
+    public void OnClick(View view) {
+        if (view == ivBack) {
+            onBack();
+        } else if (view == tvTitle) {
+            onTitleClick();
+        } else if (view == tvMenu) {
+            onTvMenuClick(tvMenu);
+        } else if (view == ivMenu){
+            onIvMenuClick(ivMenu);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        onBack();
+    }
+
+    protected void onBack() {
+        finish();
+    }
+
+    /**
+     * 点击标题响应事件
+     */
+    protected void onTitleClick() {
+
+    }
+
+    /**
+     * 设置菜单按钮文案
+     *
+     * @param menuText 文案 stringId
+     */
+    protected void showTvMenu(@StringRes int menuText) {
+        String text = getString(menuText);
+        if (tvMenu != null && !TextUtils.isEmpty(text)) {
+            tvMenu.setText(text);
+        }
+    }
+
+    /**
+     * 文字菜单按钮点击事件
+     *
+     * @param textView 菜单按钮
+     */
+    protected void onTvMenuClick(TextView textView) {
+
+    }
+
+    /**
+     * 设置菜单按钮图片
+     *
+     * @param menuIco 图片 id
+     */
+    protected void showIvMenu(@DrawableRes int menuIco) {
+        if (ivMenu != null) {
+            ivMenu.setVisibility(View.VISIBLE);
+            ivMenu.setImageResource(menuIco);
+        }
+    }
+
+    /**
+     * 图片菜单按钮点击事件
+     *
+     * @param imageView 图片按钮
+     */
+    protected void onIvMenuClick(ImageView imageView) {
+
+    }
 }
