@@ -24,7 +24,7 @@ import pri.ky2.ky2coderepos.R;
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
-    protected final static String TAG = "BaseActivity";
+    protected final String TAG = this.getClass().getSimpleName();
     private BaseUIHelper mUIHelper;
 
     @Nullable

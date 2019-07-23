@@ -3,10 +3,12 @@ package pri.ky2.ky2coderepos;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import pri.ky2.ky2coderepos.base.BaseActivity;
+import pri.ky2.ky2coderepos.base.BaseApplication;
+import pri.ky2.ky2coderepos.utils.ToastUtils;
 
 public class MainActivity extends BaseActivity {
 
@@ -23,6 +25,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void afterInitViews() {
         showTvMenu(R.string.image_description);
+        Log.d(TAG, "" + BaseApplication.getAppContext());
     }
 
     @Override
@@ -33,7 +36,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onTvMenuClick(TextView textView) {
         super.onTvMenuClick(textView);
-        Toast.makeText(this, R.string.image_description, Toast.LENGTH_SHORT).show();
+        ToastUtils.show(R.string.image_description);
     }
 
     @Override
