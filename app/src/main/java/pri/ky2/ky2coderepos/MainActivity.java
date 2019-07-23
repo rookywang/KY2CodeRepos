@@ -1,13 +1,21 @@
 package pri.ky2.ky2coderepos;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import pri.ky2.ky2coderepos.base.BaseActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected int setLayoutId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected void afterInitViews() {
+
+    }
+
+    @Override
+    protected int setTitleId() {
+        return R.string.app_name;
     }
 }
