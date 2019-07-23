@@ -25,6 +25,7 @@ import pri.ky2.ky2coderepos.R;
 public abstract class BaseActivity extends AppCompatActivity {
 
     protected final static String TAG = "BaseActivity";
+    private BaseUIHelper mUIHelper;
 
     @Nullable
     @BindView(R.id.iv_common_title_back)
@@ -43,8 +44,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(setLayoutId());
+        // ButterKnife 绑定，必须在 setContentView 之后
         ButterKnife.bind(this);
+        mUIHelper = new BaseUIHelper(this);
         initVariables(savedInstanceState);
+        // 如果有 title
+        // 一定要在布局文件里面引入 <include layout="@layout/include_common_title"/>
         if (tvTitle != null && setTitleId() != 0) {
             tvTitle.setText(getString(setTitleId()));
         }
@@ -81,22 +86,25 @@ public abstract class BaseActivity extends AppCompatActivity {
             R.id.tv_common_title_menu, R.id.iv_common_title_menu})
     public void OnClick(View view) {
         if (view == ivBack) {
-            onBack();
+            onBackClick();
         } else if (view == tvTitle) {
             onTitleClick();
         } else if (view == tvMenu) {
             onTvMenuClick(tvMenu);
-        } else if (view == ivMenu){
+        } else if (view == ivMenu) {
             onIvMenuClick(ivMenu);
         }
     }
 
     @Override
     public void onBackPressed() {
-        onBack();
+        onBackClick();
     }
 
-    protected void onBack() {
+    /**
+     * 返回按键
+     */
+    protected void onBackClick() {
         finish();
     }
 
@@ -104,7 +112,6 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 点击标题响应事件
      */
     protected void onTitleClick() {
-
     }
 
     /**
@@ -125,7 +132,6 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param textView 菜单按钮
      */
     protected void onTvMenuClick(TextView textView) {
-
     }
 
     /**
@@ -146,6 +152,27 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param imageView 图片按钮
      */
     protected void onIvMenuClick(ImageView imageView) {
+    }
 
+    /**
+     * 显示加载圈
+     */
+    protected void showLoading() {
+        showLoading(true, "");
+    }
+
+    protected void showLoading(String msg) {
+        showLoading(true, msg);
+    }
+
+    protected void showLoading(boolean canCancel, String msg) {
+        mUIHelper.showLoading(canCancel, msg);
+    }
+
+    /**
+     * 取消加载圈
+     */
+    protected void hideLoading() {
+        mUIHelper.hideLoading();
     }
 }

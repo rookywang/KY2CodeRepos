@@ -1,6 +1,7 @@
 package pri.ky2.ky2coderepos;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +39,12 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onTitleClick() {
         super.onTitleClick();
-        Toast.makeText(this, "Title", Toast.LENGTH_SHORT).show();
+        showLoading(getString(R.string.image_description));
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                hideLoading();
+            }
+        }, 2000);
     }
 }
