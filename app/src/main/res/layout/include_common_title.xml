@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@android:color/white">
+
+    <ImageView
+        android:id="@+id/iv_common_title_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/image_description"
+        android:paddingStart="15dp"
+        android:paddingTop="6dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="6dp"
+        android:src="@mipmap/arrow_back" />
+
+    <TextView
+        android:id="@+id/tv_common_title_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:paddingStart="25dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="15dp"
+        android:paddingBottom="5dp"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        tools:text="menu" />
+
+    <ImageView
+        android:id="@+id/iv_common_title_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/image_description"
+        android:paddingStart="25dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="15dp"
+        android:paddingBottom="5dp"
+        android:src="@drawable/selector_bg_white_grey"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_common_title_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_toStartOf="@id/tv_common_title_menu"
+        android:layout_toEndOf="@id/iv_common_title_back"
+        android:gravity="center"
+        android:maxLines="2"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        tools:text="title" />
+</RelativeLayout>
