@@ -102,6 +102,15 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
+     * 隐藏返回键
+     */
+    public void hideBackBtn() {
+        if (null != ivBack) {
+            ivBack.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    /**
      * 返回按键
      */
     protected void onBackClick() {
