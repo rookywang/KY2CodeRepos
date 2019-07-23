@@ -7,5 +7,8 @@
     <color name="white">@android:color/white</color>
     <color name="common_bg_grey">#F6F6F7</color>
     <color name="common_text_black">#333333</color>
+    <color name="common_text_light_black">#666666</color>
+    <color name="common_divider">#E2E1E7</color>
+    <color name="common_blue">#157EFB</color>
 
 </resources>
