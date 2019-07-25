@@ -40,10 +40,15 @@ public abstract class NetObserver<T> implements SingleObserver<NetResponse> {
     private Class<T> mTClass;
 
     /**
-     *
+     * 页面与网络请求管理
      */
     private ILoadingView mILoadingView;
+
+    /**
+     * 页面加载框是否显示
+     */
     private boolean isLoadingDialogShowing;
+
     /**
      * 字段（返回数据 data 部分只有单个字段）的名称
      */
