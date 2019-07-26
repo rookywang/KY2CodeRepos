@@ -62,12 +62,12 @@ public abstract class NetObserver<T> implements SingleObserver<NetResponse> {
     /**
      * Header 键值对
      */
-    private HashMap<String, String> mHeaders;
+    private HashMap<String, String> mHeaders = new HashMap<>();
 
     /**
      * Body 键值对
      */
-    private HashMap<String, String> mParams;
+    private HashMap<String, String> mParams = new HashMap<>();
 
     public NetObserver(Class<T> cls, ILoadingView iLoadingView) {
         mTClass = cls;
@@ -122,7 +122,7 @@ public abstract class NetObserver<T> implements SingleObserver<NetResponse> {
      * @param msg  错误信息
      */
     public void onError(String code, String msg) {
-        Log.i(TAG, "onError code: " + code + "msg: " + msg);
+        Log.i(TAG, "onError code: " + code + " msg: " + msg);
         if (mILoadingView != null && mILoadingView.isClosed()) {
             return;
         }
