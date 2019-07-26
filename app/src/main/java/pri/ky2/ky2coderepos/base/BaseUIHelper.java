@@ -8,7 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+import io.reactivex.disposables.Disposable;
 import pri.ky2.ky2coderepos.R;
+import pri.ky2.ky2coderepos.net.NetRequest;
 
 /**
  * UI 辅助类，定义了加载框
@@ -20,9 +27,13 @@ public class BaseUIHelper {
 
     private Activity mActivity;
     private Dialog mLoadingDialog;
+    private List<Disposable> mRequestList;
+    private Unbinder mUnBinder;
 
     public BaseUIHelper(Activity activity) {
         mActivity = activity;
+        // ButterKnife 绑定，必须在 setContentView 之后
+        mUnBinder = ButterKnife.bind(activity);
     }
 
     public void showLoading(boolean canCancel, String msg) {
@@ -48,6 +59,21 @@ public class BaseUIHelper {
         }
     }
 
+    public void addNetRequest(Disposable disposable) {
+        if (mRequestList == null) {
+            mRequestList = new ArrayList<>();
+        }
+        mRequestList.add(disposable);
+    }
+
+    public void destroy() {
+        hideLoading();
+        NetRequest.cancel(mRequestList);
+        if (mUnBinder != null) {
+            mUnBinder.unbind();
+        }
+    }
+
     private Context getContext() {
         if (mActivity != null) {
             return mActivity;
@@ -55,8 +81,8 @@ public class BaseUIHelper {
         return null;
     }
 
-    private boolean isClosed() {
-        if (mActivity == null || mActivity.isFinishing()) {
+    public boolean isClosed() {
+        if (mActivity == null || mActivity.isFinishing() || mActivity.isDestroyed()) {
             return true;
         }
         return false;

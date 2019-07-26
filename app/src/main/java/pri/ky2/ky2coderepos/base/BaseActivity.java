@@ -11,16 +11,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.disposables.Disposable;
 import pri.ky2.ky2coderepos.R;
 import pri.ky2.ky2coderepos.interfaces.ILoadingView;
-import pri.ky2.ky2coderepos.net.NetRequest;
 
 /**
  * Activity 基类
@@ -28,11 +23,10 @@ import pri.ky2.ky2coderepos.net.NetRequest;
  * @author wangkaiyan
  * @date 2019/07/23
  */
-public abstract class BaseActivity extends AppCompatActivity implements ILoadingView{
+public abstract class BaseActivity extends AppCompatActivity implements ILoadingView {
 
     protected final String TAG = this.getClass().getSimpleName();
     private BaseUIHelper mUIHelper;
-    private List<Disposable> mRequestList;
 
     @Nullable
     @BindView(R.id.iv_common_title_back)
@@ -51,8 +45,6 @@ public abstract class BaseActivity extends AppCompatActivity implements ILoading
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(setLayoutId());
-        // ButterKnife 绑定，必须在 setContentView 之后
-        ButterKnife.bind(this);
         mUIHelper = new BaseUIHelper(this);
         initVariables(savedInstanceState);
         // 如果有 title
@@ -204,15 +196,12 @@ public abstract class BaseActivity extends AppCompatActivity implements ILoading
 
     @Override
     public void addNetRequest(Disposable disposable) {
-        if (mRequestList == null) {
-            mRequestList = new ArrayList<>();
-        }
-        mRequestList.add(disposable);
+        mUIHelper.addNetRequest(disposable);
     }
 
     @Override
     public boolean isClosed() {
-        return isFinishing() || isDestroyed();
+        return mUIHelper.isClosed();
     }
 
     @Override
@@ -223,7 +212,6 @@ public abstract class BaseActivity extends AppCompatActivity implements ILoading
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        hideLoading();
-        NetRequest.cancel(mRequestList);
+        mUIHelper.destroy();
     }
 }
