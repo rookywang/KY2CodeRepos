@@ -1,17 +1,20 @@
-package pri.ky2.ky2coderepos;
+package pri.ky2.ky2coderepos.test;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import pri.ky2.ky2coderepos.R;
 import pri.ky2.ky2coderepos.base.BaseActivity;
-import pri.ky2.ky2coderepos.base.BaseApplication;
 import pri.ky2.ky2coderepos.utils.ToastUtils;
 import pri.ky2.ky2coderepos.widget.CommonDialog;
 
 public class MainActivity extends BaseActivity {
+
+    @BindView(R.id.tv_test)
+    TextView tvTest;
 
     @Override
     protected void initVariables(@Nullable Bundle savedInstanceState) {
@@ -26,7 +29,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void afterInitViews() {
         showTvMenu(R.string.image_description);
-        Log.d(TAG, "" + BaseApplication.getAppContext());
     }
 
     @Override
