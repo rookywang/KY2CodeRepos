@@ -26,6 +26,7 @@ import pri.ky2.ky2coderepos.net.NetRequest;
 public class BaseUIHelper {
 
     private Activity mActivity;
+    private BaseFragment mFragment;
     private Dialog mLoadingDialog;
     private List<Disposable> mRequestList;
     private Unbinder mUnBinder;
@@ -34,6 +35,11 @@ public class BaseUIHelper {
         mActivity = activity;
         // ButterKnife 绑定，必须在 setContentView 之后
         mUnBinder = ButterKnife.bind(activity);
+    }
+
+    public BaseUIHelper(BaseFragment fragment, View view) {
+        mFragment = fragment;
+        mUnBinder = ButterKnife.bind(fragment, view);
     }
 
     public void showLoading(boolean canCancel, String msg) {
@@ -78,6 +84,9 @@ public class BaseUIHelper {
         if (mActivity != null) {
             return mActivity;
         }
+        if (mFragment != null) {
+            return mFragment.getActivity();
+        }
         return null;
     }
 
@@ -85,6 +94,6 @@ public class BaseUIHelper {
         if (mActivity == null || mActivity.isFinishing() || mActivity.isDestroyed()) {
             return true;
         }
-        return false;
+        return mFragment != null && mFragment.isDetached();
     }
 }
