@@ -2,17 +2,22 @@ package pri.ky2.ky2coderepos.test;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.widget.TextView;
+import android.widget.RadioButton;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import pri.ky2.ky2coderepos.R;
-import pri.ky2.ky2coderepos.base.BaseActivity;
-import pri.ky2.ky2coderepos.utils.ToastUtils;
+import pri.ky2.ky2coderepos.base.BaseFragmentActivity;
+import pri.ky2.ky2coderepos.widget.MainViewPager;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseFragmentActivity {
 
-    @BindView(R.id.tv_test)
-    TextView tvTest;
+    @BindView(R.id.vp_main)
+    MainViewPager mvpMain;
+    @BindView(R.id.rb_main)
+    RadioButton rbMain;
+    @BindView(R.id.rb_mine)
+    RadioButton rbMine;
 
     @Override
     protected void initVariables(@Nullable Bundle savedInstanceState) {
@@ -26,22 +31,42 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void afterInitViews() {
-        showTvMenu(R.string.image_description);
+        mvpMain.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
+        mvpMain.setCurrentItem(MainPagerAdapter.TAB_MAIN);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        togglePage(mvpMain.getCurrentItem());
     }
 
     @Override
     protected int setTitleId() {
-        return R.string.app_name;
+        return 0;
     }
 
-    @Override
-    protected void onTvMenuClick(TextView textView) {
-        super.onTvMenuClick(textView);
-        ToastUtils.show(R.string.image_description);
+    @OnClick(R.id.rb_main)
+    public void showDevice() {
+        togglePage(MainPagerAdapter.TAB_MAIN);
     }
 
-    @Override
-    protected void onTitleClick() {
-        super.onTitleClick();
+    @OnClick(R.id.rb_mine)
+    public void showMine() {
+        togglePage(MainPagerAdapter.TAB_MINE);
+    }
+
+    /**
+     * 切换 Fragment 和菜单选项按钮
+     */
+    private void togglePage(int position) {
+        mvpMain.setCurrentItem(position);
+        rbMain.setSelected(false);
+        rbMine.setSelected(false);
+        if (position == MainPagerAdapter.TAB_MAIN) {
+            rbMain.setSelected(true);
+        } else if (position == MainPagerAdapter.TAB_MINE) {
+            rbMine.setSelected(true);
+        }
     }
 }

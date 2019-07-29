@@ -50,9 +50,7 @@ public abstract class BaseFragment extends Fragment implements ILoadingView {
     /**
      * 初始化 View 之后，进行数据填充、网络请求等操作
      */
-    public void afterInitViews() {
-
-    }
+    public abstract void afterInitViews();
 
     /**
      * 显示加载圈
