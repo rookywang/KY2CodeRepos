@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.RadioButton;
 
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import pri.ky2.ky2coderepos.R;
@@ -33,6 +36,7 @@ public class MainActivity extends BaseFragmentActivity {
     protected void afterInitViews() {
         mvpMain.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
         mvpMain.setCurrentItem(MainPagerAdapter.TAB_MAIN);
+        initThirdLibraries();
     }
 
     @Override
@@ -68,5 +72,9 @@ public class MainActivity extends BaseFragmentActivity {
         } else if (position == MainPagerAdapter.TAB_MINE) {
             rbMine.setSelected(true);
         }
+    }
+
+    private void initThirdLibraries() {
+        Logger.addLogAdapter(new AndroidLogAdapter());
     }
 }
