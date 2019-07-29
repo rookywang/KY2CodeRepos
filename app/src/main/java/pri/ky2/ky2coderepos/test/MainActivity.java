@@ -2,14 +2,12 @@ package pri.ky2.ky2coderepos.test;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.View;
 import android.widget.TextView;
 
 import butterknife.BindView;
 import pri.ky2.ky2coderepos.R;
 import pri.ky2.ky2coderepos.base.BaseActivity;
 import pri.ky2.ky2coderepos.utils.ToastUtils;
-import pri.ky2.ky2coderepos.widget.CommonDialog;
 
 public class MainActivity extends BaseActivity {
 
@@ -45,29 +43,5 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onTitleClick() {
         super.onTitleClick();
-//        showLoading(getString(R.string.image_description));
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                hideLoading();
-//            }
-//        }, 2000);
-        new CommonDialog.Builder(this)
-                .setContent(R.string.app_name)
-                .setPositiveListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ToastUtils.show("确定");
-                    }
-                })
-                .showNegativeBtn()
-                .setNegativeListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ToastUtils.show("取消");
-                    }
-                })
-                .build()
-                .show();
     }
 }
