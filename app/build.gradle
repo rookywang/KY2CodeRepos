@@ -13,6 +13,20 @@ android {
         // HOST
         buildConfigField "String", "HOST", "\"https://api.github.com/\""
     }
+    sourceSets {
+        main {
+            res.srcDirs =
+                    [
+                            'src/main/res/layout/activity',
+                            'src/main/res/layout/common',
+                            'src/main/res/layout/dialog',
+                            'src/main/res/layout/fragment',
+                            'src/main/res/layout/itemviews',
+                            'src/main/res/layout/customviews',
+                            'src/main/res'
+                    ]
+        }
+    }
     buildTypes {
 
         debug {
