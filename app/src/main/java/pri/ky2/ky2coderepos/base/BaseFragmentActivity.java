@@ -23,7 +23,7 @@ import pri.ky2.ky2coderepos.interfaces.ILoadingView;
  */
 public abstract class BaseFragmentActivity extends FragmentActivity implements ILoadingView {
 
-    private BaseUIHelper mUIHelper;
+    private BaseUiHelper mUIHelper;
     protected ImageView ivBack;
     protected TextView tvTitle;
     protected TextView tvMenu;
@@ -33,7 +33,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity implements I
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(setLayoutId());
-        mUIHelper = new BaseUIHelper(this);
+        mUIHelper = new BaseUiHelper(this);
         initVariables(savedInstanceState);
         // 如果有 title
         // 一定要在布局文件里面引入 <include layout="@layout/include_common_title"/>

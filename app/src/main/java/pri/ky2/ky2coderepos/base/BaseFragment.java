@@ -21,7 +21,7 @@ import pri.ky2.ky2coderepos.interfaces.ILoadingView;
 public abstract class BaseFragment extends Fragment implements ILoadingView {
 
     private View mRootView;
-    private BaseUIHelper mUIHelper;
+    private BaseUiHelper mUIHelper;
 
     @Nullable
     @Override
@@ -30,7 +30,7 @@ public abstract class BaseFragment extends Fragment implements ILoadingView {
         if (mRootView == null) {
             mRootView = inflater.inflate(setLayoutId(), null);
         }
-        mUIHelper = new BaseUIHelper(this, mRootView);
+        mUIHelper = new BaseUiHelper(this, mRootView);
         afterInitViews();
         return mRootView;
     }

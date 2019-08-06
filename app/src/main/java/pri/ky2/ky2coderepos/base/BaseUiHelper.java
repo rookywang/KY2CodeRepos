@@ -23,7 +23,7 @@ import pri.ky2.ky2coderepos.net.NetRequest;
  * @author wangkaiyan
  * @date 2019/07/23
  */
-public class BaseUIHelper {
+public class BaseUiHelper {
 
     private Activity mActivity;
     private BaseFragment mFragment;
@@ -31,13 +31,13 @@ public class BaseUIHelper {
     private List<Disposable> mRequestList;
     private Unbinder mUnBinder;
 
-    public BaseUIHelper(Activity activity) {
+    public BaseUiHelper(Activity activity) {
         mActivity = activity;
         // ButterKnife 绑定，必须在 setContentView 之后
         mUnBinder = ButterKnife.bind(activity);
     }
 
-    public BaseUIHelper(BaseFragment fragment, View view) {
+    public BaseUiHelper(BaseFragment fragment, View view) {
         mFragment = fragment;
         mUnBinder = ButterKnife.bind(fragment, view);
     }

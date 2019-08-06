@@ -26,7 +26,7 @@ import pri.ky2.ky2coderepos.interfaces.ILoadingView;
 public abstract class BaseActivity extends AppCompatActivity implements ILoadingView {
 
     protected final String TAG = this.getClass().getSimpleName();
-    private BaseUIHelper mUIHelper;
+    private BaseUiHelper mUIHelper;
 
     @Nullable
     @BindView(R.id.iv_common_title_back)
@@ -45,7 +45,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ILoading
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(setLayoutId());
-        mUIHelper = new BaseUIHelper(this);
+        mUIHelper = new BaseUiHelper(this);
         initVariables(savedInstanceState);
         // 如果有 title
         // 一定要在布局文件里面引入 <include layout="@layout/include_common_title"/>
