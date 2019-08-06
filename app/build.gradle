@@ -18,7 +18,7 @@ android {
         // 项目的目标版本，表明已经在这个版本上做了充分的测试
         // Android 系统的行为变更，只有 targetSdkVersion 大于等于这个系统版本值得时候才会生效
         // 例如，targetSdkVersion 支持 4.1，那么在 5.0 的手机上新特性就不会启用
-        targetSdkVersion 23
+        targetSdkVersion 26
         // 版本号
         versionCode 1
         // 版本名
