@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import butterknife.Optional;
 import io.reactivex.disposables.Disposable;
 import pri.ky2.ky2coderepos.R;
 import pri.ky2.ky2coderepos.interfaces.ILoadingView;
@@ -81,6 +82,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ILoading
      */
     protected abstract int setTitleId();
 
+    @Optional
     @OnClick({R.id.iv_common_title_back, R.id.tv_common_title_title,
             R.id.tv_common_title_menu, R.id.iv_common_title_menu})
     public void OnClick(View view) {
