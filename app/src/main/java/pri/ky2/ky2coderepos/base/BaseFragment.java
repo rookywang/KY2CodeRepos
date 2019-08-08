@@ -53,14 +53,14 @@ public abstract class BaseFragment extends Fragment implements ILoadingView {
     public abstract void afterInitViews();
 
     /**
-     * 显示加载圈
+     * 显示加载圈，不可取消
      */
     protected void showLoading() {
-        showLoading(true, "");
+        showLoading(false, "");
     }
 
     protected void showLoading(String msg) {
-        showLoading(true, msg);
+        showLoading(false, msg);
     }
 
     protected void showLoading(boolean canCancel, String msg) {
@@ -74,6 +74,9 @@ public abstract class BaseFragment extends Fragment implements ILoadingView {
         mUIHelper.hideLoading();
     }
 
+    /**
+     * 显示加载圈，可取消
+     */
     @Override
     public void showLoadingDialog(String msg) {
         mUIHelper.showLoading(true, msg);
