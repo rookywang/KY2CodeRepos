@@ -187,6 +187,11 @@ public class NetRequest {
             RequestBody requestBody = RequestBody.create(MediaType.parse("image/jpg"), "");
             fileMap.put("", requestBody);
         }
+        getRetrofit().create(ApiService.class).<T>uploadMultiFiles(url, headers, fileMap)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(netObserver);
     }
 
     /**
